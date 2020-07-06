@@ -1,0 +1,7 @@
+plugins:
+  linkify_google_enabled:
+    default: true
+    client: true
+  linkify_google_sheet_id:
+    default: ""
+    client: true
