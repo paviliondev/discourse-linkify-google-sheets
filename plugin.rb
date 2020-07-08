@@ -24,6 +24,6 @@ after_initialize do
   require File.expand_path('../app/jobs/scheduled/update_links.rb', __FILE__)
 
   add_to_serializer(:site, :linkify_data, false) do 
-    PluginStoreRow.where(plugin_name: ::LinkifyGoogle::PLUGIN_NAME).pluck(:key, :value)
+    PluginStoreRow.where(plugin_name: ::LinkifyGoogle::PLUGIN_NAME).pluck(:key, :value).to_h
   end
 end
