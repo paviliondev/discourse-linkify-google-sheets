@@ -4,7 +4,7 @@ module Jobs
   class UpdateLinks < ::Jobs::Scheduled
     every 6.hours
 
-    def execute()
+    def execute(_args)
       sheets = ::Google::Apis::SheetsV4::SheetsService.new
       scopes =  ['https://www.googleapis.com/auth/spreadsheets.readonly']
       sheets.authorization = Google::Auth.get_application_default(scopes)
