@@ -10,7 +10,7 @@ module Jobs
       sheets.authorization = Google::Auth.get_application_default(scopes)
       spreadsheet_id = SiteSetting.linkify_google_sheet_id
       return unless spreadsheet_id.present?
-      range = "Sheet1!A1:B"
+      range = SiteSetting.linkify_google_sheet_name+"!"+SiteSetting.linkify_google_sheet_cell_range
       response = sheets.get_spreadsheet_values spreadsheet_id, range
       return if response.values.empty?
       response.values.each do |row|

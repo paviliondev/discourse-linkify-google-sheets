@@ -5,3 +5,9 @@ plugins:
   linkify_google_sheet_id:
     default: ""
     client: true
+  linkify_google_sheet_name:
+    default: "Sheet1"
+    client: true
+  linkify_google_sheet_cell_range:
+    default: "A1:B"
+    client: true
