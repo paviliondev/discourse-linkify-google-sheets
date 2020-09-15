@@ -13,14 +13,12 @@ module Jobs
       range = SiteSetting.linkify_google_sheet_name+"!"+SiteSetting.linkify_google_sheet_cell_range
       response = sheets.get_spreadsheet_values spreadsheet_id, range
       return if response.values.empty?
+      keys = []
       data = response.values.map do |arr|
         Rails.logger.warn(arr.inspect)
-        { plugin_name: ::LinkifyGoogle::PLUGIN_NAME, key: arr[0], value: arr[1], type_name: 'String' }
+        keys << arr[0]
+        PluginStore.set(::LinkifyGoogle::PLUGIN_NAME, arr[0], arr[1])
       end
-
-      PluginStoreRow.insert_all(data);
-
-      keys = data.pluck(:key)
 
       PluginStoreRow.where(plugin_name: ::LinkifyGoogle::PLUGIN_NAME).where.not(key: keys).destroy_all
     end
